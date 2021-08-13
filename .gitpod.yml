@@ -1,0 +1,11 @@
+tasks:
+  - init: |
+      sudo docker pull registry.jetbrains.team/p/prj/containers/projector-rubymine
+    command: |
+      sudo mkdir -p .jetbrains; sudo touch .jetbrains/.gitkeep; sudo chown -R 1000:1000 .jetbrains
+      sudo docker run --rm -p 8887:8887 -v /workspace/template-jetbrains-rubymine/.jetbrains:/home/projector-user -it registry.jetbrains.team/p/prj/containers/projector-rubymine
+
+ports:
+  - port: 8887
+    visibility: private
+    onOpen: open-browser
